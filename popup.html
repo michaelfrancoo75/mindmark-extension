@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MindMark</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+      width: 360px;
+      background: #f8fafc;
+      color: #111827;
+      margin: 0;
+      padding: 14px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    p.small {
+      font-size: 10px;
+      color: gray;
+      margin: 2px 0;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #374151;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #status {
+      font-size: 12px;
+      color: #4b5563;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .snapshot-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .muted {
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .tag {
+      background: #e0e7ff;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      margin-right: 4px;
+    }
+
+    .list {
+      max-height: 320px;
+      overflow-y: auto;
+      margin-top: 6px;
+      padding-right: 6px;
+    }
+
+    /* Loader */
+    #loader {
+      display: none;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #2563eb;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #16a34a;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Offline banner */
+    #offlineBanner {
+      display: none;
+      background: #fde68a;
+      color: #111;
+      padding: 5px 8px;
+      text-align: center;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="offlineBanner">Offline Mode: AI summaries unavailable</div>
+
+  <header>
+    <img src="assets/icon48.png" width="36" height="36" alt="MindMark"/>
+    <div>
+      <h1>MindMark</h1>
+      <p class="small">Data stored locally — never leaves this device.</p>
+      <div class="subtitle">Save tab intent • Private • Offline</div>
+    </div>
+  </header>
+
+  <div id="status">Ready.</div>
+
+  <div id="loader">Thinking...</div>
+
+  <div class="actions">
+    <button id="captureBtn">Capture Tab</button>
+    <button id="refreshBtn">Refresh</button>
+    <button id="exportBtn">Export MD</button>
+  </div>
+
+  <div id="latest" class="card" style="display:none;">
+    <div class="snapshot-title" id="latestTitle"></div>
+    <div class="muted" id="latestUrl"></div>
+    <div id="latestIntent" style="margin-top:6px;"></div>
+    <div id="latestSummary" style="margin-top:8px;"></div>
+    <div style="margin-top:8px;">
+      <button id="openTabBtn">Open Tab</button>
+    </div>
+  </div>
+
+  <h3 style="margin:10px 0 6px 0; font-size:14px;">Saved Snapshots</h3>
+  <div id="snapshots" class="list"></div>
+
+  <div id="toast"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
