@@ -1,0 +1,27 @@
+{
+  "name": "mindmark-extension",
+  "version": "1.0.1",
+  "description": "AI-Powered Memory for Chrome - Chrome Built-in AI Challenge",
+  "author": "Michael Francoo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelfrancoo75/mindmark-extension"
+  },
+  "keywords": [
+    "chrome-extension",
+    "ai",
+    "gemini-nano",
+    "productivity",
+    "tab-manager",
+    "summarization",
+    "intent-detection",
+    "material-design",
+    "offline-first",
+    "privacy"
+  ],
+  "homepage": "https://github.com/michaelfrancoo75/mindmark-extension#readme",
+  "bugs": {
+    "url": "https://github.com/michaelfrancoo75/mindmark-extension/issues"
+  }
+}
