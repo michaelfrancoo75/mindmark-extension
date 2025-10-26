@@ -3,176 +3,821 @@
 <head>
   <meta charset="utf-8" />
   <title>MindMark</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
 
   <style>
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
-      width: 360px;
-      background: #f8fafc;
-      color: #111827;
-      margin: 0;
-      padding: 14px;
+    /* Google Material Design 3 Theme */
+    :root {
+      /* Google Blue (Primary) */
+      --google-blue-50: #E8F0FE;
+      --google-blue-100: #D2E3FC;
+      --google-blue-200: #AECBFA;
+      --google-blue-300: #8AB4F8;
+      --google-blue-400: #669DF6;
+      --google-blue-500: #4285F4;
+      --google-blue-600: #1A73E8;
+      --google-blue-700: #1967D2;
+      --google-blue-800: #185ABC;
+      --google-blue-900: #174EA6;
+
+      /* Google Red (Error) */
+      --google-red-50: #FCE8E6;
+      --google-red-500: #EA4335;
+      --google-red-600: #D93025;
+
+      /* Google Yellow (Warning) */
+      --google-yellow-50: #FEF7E0;
+      --google-yellow-500: #FBBC04;
+
+      /* Google Green (Success) */
+      --google-green-50: #E6F4EA;
+      --google-green-500: #34A853;
+      --google-green-600: #1E8E3E;
+
+      /* Neutrals (Google Grey) */
+      --google-grey-50: #F8F9FA;
+      --google-grey-100: #F1F3F4;
+      --google-grey-200: #E8EAED;
+      --google-grey-300: #DADCE0;
+      --google-grey-400: #BDC1C6;
+      --google-grey-500: #9AA0A6;
+      --google-grey-600: #80868B;
+      --google-grey-700: #5F6368;
+      --google-grey-800: #3C4043;
+      --google-grey-900: #202124;
+
+      /* Semantic Colors */
+      --primary: var(--google-blue-600);
+      --primary-hover: var(--google-blue-700);
+      --primary-light: var(--google-blue-50);
+      --on-primary: #FFFFFF;
+
+      --surface: #FFFFFF;
+      --surface-variant: var(--google-grey-100);
+      --on-surface: var(--google-grey-900);
+      --on-surface-variant: var(--google-grey-700);
+
+      --outline: var(--google-grey-300);
+      --outline-variant: var(--google-grey-200);
+
+      --error: var(--google-red-600);
+      --success: var(--google-green-600);
+      --warning: var(--google-yellow-500);
+
+      /* Typography */
+      --font-google: 'Google Sans', 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Roboto', 'Segoe UI', sans-serif;
+
+      /* Elevation (Shadows) */
+      --elevation-0: none;
+      --elevation-1: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+      --elevation-2: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+      --elevation-3: 0 4px 8px 3px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.3);
+
+      /* Motion */
+      --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+      --easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+      --duration-short: 150ms;
+      --duration-medium: 250ms;
+      --duration-long: 350ms;
+
+      /* Shape */
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 28px;
     }
 
+    /* Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 450px;
+      min-height: 550px;
+      max-height: 700px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--on-surface);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+    }
+
+    /* Header (Sticky Toolbar) */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+      box-shadow: var(--elevation-1);
     }
 
-    h1 {
-      font-size: 18px;
-      margin: 0;
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    p.small {
-      font-size: 10px;
-      color: gray;
-      margin: 2px 0;
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
     }
 
-    .subtitle {
-      font-size: 12px;
-      color: #374151;
+    .logo-text h1 {
+      font-family: var(--font-google);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.2;
+      letter-spacing: -0.3px;
     }
 
-    .actions {
+    .logo-text .tagline {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Theme Toggle */
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--on-surface-variant);
+      transition: all var(--duration-short) var(--easing-standard);
+    }
+
+    .icon-button:hover {
+      background: var(--surface-variant);
+      color: var(--on-surface);
+    }
+
+    .icon-button:active {
+      transform: scale(0.95);
+    }
+
+    .icon-button[aria-pressed="true"] {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Search Bar (Material Design) */
+    .search-bar {
+      margin: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-variant);
+      border-radius: var(--radius-xl);
+      padding: 8px 16px;
+      transition: all var(--duration-short) var(--easing-standard);
+    }
+
+    .search-bar:focus-within {
+      background: var(--surface);
+      box-shadow: var(--elevation-2);
+    }
+
+    .search-bar .material-icons-round {
+      color: var(--on-surface-variant);
+      font-size: 20px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--on-surface);
+      font-weight: 400;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--on-surface-variant);
+    }
+
+    /* Status Bar */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 16px 12px;
+      padding: 8px 12px;
+      background: var(--surface-variant);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .status-loading .status-indicator {
+      background: var(--warning);
+    }
+
+    .status-error .status-indicator {
+      background: var(--error);
+    }
+
+    /* Action Buttons (Google Material) */
+    .action-bar {
       display: flex;
       gap: 8px;
-      margin-top: 10px;
+      padding: 0 16px 16px;
     }
 
-    button {
-      background: #2563eb;
-      color: white;
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 16px;
       border: none;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    #status {
-      font-size: 12px;
-      color: #4b5563;
-      margin-top: 6px;
-      margin-bottom: 4px;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 10px;
-      margin-top: 10px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    .snapshot-title {
-      font-weight: 600;
+      border-radius: var(--radius-xl);
+      font-family: var(--font-google);
       font-size: 14px;
-      margin-bottom: 3px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-short) var(--easing-standard);
+      white-space: nowrap;
+      letter-spacing: 0.25px;
     }
 
-    .muted {
-      color: #6b7280;
-      font-size: 12px;
+    .btn .material-icons-round {
+      font-size: 18px;
     }
 
-    .tag {
-      background: #e0e7ff;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-size: 11px;
-      margin-right: 4px;
+    /* Primary Button (Filled) */
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+      box-shadow: var(--elevation-1);
     }
 
-    .list {
-      max-height: 320px;
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: var(--elevation-2);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    /* Secondary Button (Outlined) */
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--outline);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Snapshot List Container - INCREASED HEIGHT */
+    .content-area {
+      position: relative;
       overflow-y: auto;
-      margin-top: 6px;
-      padding-right: 6px;
+      overflow-x: hidden;
+      max-height: calc(100vh - 240px);
+      padding: 0 16px 16px;
     }
 
-    /* Loader */
-    #loader {
-      display: none;
-      margin: 8px 0;
-      font-size: 13px;
-      color: #2563eb;
+    .content-area::-webkit-scrollbar {
+      width: 8px;
     }
 
-    /* Toast */
-    #toast {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: #16a34a;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      display: none;
-      z-index: 1000;
+    .content-area::-webkit-scrollbar-track {
+      background: transparent;
     }
 
-    /* Offline banner */
-    #offlineBanner {
-      display: none;
-      background: #fde68a;
-      color: #111;
-      padding: 5px 8px;
-      text-align: center;
-      border-radius: 6px;
+    .content-area::-webkit-scrollbar-thumb {
+      background: var(--outline);
+      border-radius: 4px;
+    }
+
+    .content-area::-webkit-scrollbar-thumb:hover {
+      background: var(--google-grey-500);
+    }
+
+    /* Snapshot Card (Material Design) */
+    .snapshot-card {
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--elevation-1);
+    }
+
+    .card-header {
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--font-google);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .card-url {
       font-size: 12px;
+      color: var(--on-surface-variant);
+      word-break: break-all;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    /* Intent Chip */
+    .intent-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .intent-chip .material-icons-round {
+      font-size: 16px;
+    }
+
+    /* Summary Section */
+    .summary-section {
+      margin-bottom: 12px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--on-surface);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 8px;
+    }
+
+    .summary-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--on-surface);
+      font-weight: 400;
+    }
+
+    .summary-line {
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .summary-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-content.expandable {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .summary-content.expandable:hover {
+      opacity: 0.85;
+    }
+
+    /* Timestamp */
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      margin-bottom: 12px;
+      opacity: 0.85;
+    }
+
+    .card-meta .material-icons-round {
+      font-size: 14px;
+    }
+
+    /* Card Actions */
+    .card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .card-actions .btn {
+      font-size: 12px;
+      height: 34px;
+      padding: 0 14px;
+    }
+
+    .btn-resume {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .btn-resume:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-edit {
+      background: var(--google-grey-200);
+      color: var(--google-grey-800);
+    }
+
+    .btn-edit:hover {
+      background: var(--google-grey-300);
+    }
+
+    .btn-delete {
+      background: var(--google-red-50);
+      color: var(--error);
+    }
+
+    .btn-delete:hover {
+      background: var(--google-red-500);
+      color: white;
+    }
+
+    /* Empty State (Google Style) */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 24px;
+      min-height: 300px;
+    }
+
+    .empty-state.visible {
+      display: flex;
+    }
+
+    .empty-icon {
+      font-size: 72px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-title {
+      font-family: var(--font-google);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 8px;
+    }
+
+    .empty-description {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+      max-width: 300px;
+    }
+
+    /* Hide scrollbar when empty */
+    body.has-no-snapshots .content-area {
+      overflow: hidden;
+    }
+
+    /* Modal (Material Design) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn var(--duration-medium) var(--easing-standard);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-overlay.visible {
+      display: flex;
+    }
+
+    .modal-dialog {
+      width: 90%;
+      max-width: 360px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--elevation-3);
+      animation: slideUp var(--duration-medium) var(--easing-emphasized);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      padding: 24px 24px 16px;
+      font-family: var(--font-google);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .modal-body {
+      padding: 0 24px 24px;
+    }
+
+    .modal-body label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .modal-body input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--on-surface);
+      background: var(--surface);
+      transition: all var(--duration-short) var(--easing-standard);
+    }
+
+    .modal-body input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 0 24px 24px;
+    }
+
+    .modal-footer .btn {
+      flex: none;
+    }
+
+    /* Dark Theme (Google Dark Mode) */
+    body.dark {
+      --surface: var(--google-grey-900);
+      --surface-variant: var(--google-grey-800);
+      --on-surface: var(--google-grey-100);
+      --on-surface-variant: var(--google-grey-400);
+      --outline: var(--google-grey-700);
+      --outline-variant: var(--google-grey-800);
+      --primary: var(--google-blue-400);
+      --primary-hover: var(--google-blue-500);
+      --primary-light: rgba(138, 180, 248, 0.12);
+      --on-primary: var(--google-grey-900);
+    }
+
+    body.dark .snapshot-card {
+      background: var(--google-grey-800);
+    }
+
+    body.dark .btn-primary {
+      color: var(--google-grey-900);
+    }
+
+    body.dark .btn-edit {
+      background: var(--google-grey-700);
+      color: var(--google-grey-200);
+    }
+
+    body.dark .btn-edit:hover {
+      background: var(--google-grey-600);
+    }
+
+    /* Utilities */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Smooth page load */
+    body {
+      animation: fadeInUp var(--duration-medium) var(--easing-emphasized);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
-
 <body>
-  <div id="offlineBanner">Offline Mode: AI summaries unavailable</div>
-
+  <!-- Header / Toolbar -->
   <header>
-    <img src="assets/icon48.png" width="36" height="36" alt="MindMark"/>
-    <div>
-      <h1>MindMark</h1>
-      <p class="small">Data stored locally — never leaves this device.</p>
-      <div class="subtitle">Save tab intent • Private • Offline</div>
+    <div class="logo-section">
+      <img src="assets/icon48.png" alt="MindMark" class="logo-icon" />
+      <div class="logo-text">
+        <h1>MindMark</h1>
+        <div class="tagline">AI-Powered Memory</div>
+      </div>
     </div>
+    <button id="darkModeToggle" class="icon-button" aria-label="Toggle theme" aria-pressed="false">
+      <span class="material-icons-round">dark_mode</span>
+    </button>
   </header>
 
-  <div id="status">Ready.</div>
-
-  <div id="loader">Thinking...</div>
-
-  <div class="actions">
-    <button id="captureBtn">Capture Tab</button>
-    <button id="refreshBtn">Refresh</button>
-    <button id="exportBtn">Export MD</button>
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <span class="material-icons-round">search</span>
+    <input 
+      id="searchInput" 
+      type="text" 
+      placeholder="Search snapshots..." 
+      aria-label="Search snapshots"
+    />
   </div>
 
-  <div id="latest" class="card" style="display:none;">
-    <div class="snapshot-title" id="latestTitle"></div>
-    <div class="muted" id="latestUrl"></div>
-    <div id="latestIntent" style="margin-top:6px;"></div>
-    <div id="latestSummary" style="margin-top:8px;"></div>
-    <div style="margin-top:8px;">
-      <button id="openTabBtn">Open Tab</button>
+  <!-- Status Bar -->
+  <div id="statusBar" class="status-bar">
+    <span class="status-indicator"></span>
+    <span id="statusText">Ready to capture</span>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-bar">
+    <button id="captureBtn" class="btn btn-primary">
+      <span class="material-icons-round">add_a_photo</span>
+      Capture
+    </button>
+    <button id="refreshBtn" class="btn btn-secondary">
+      <span class="material-icons-round">refresh</span>
+      Refresh
+    </button>
+    <button id="exportBtn" class="btn btn-secondary">
+      <span class="material-icons-round">download</span>
+      Export
+    </button>
+  </div>
+
+  <!-- Content Area (Snapshots List) -->
+  <div id="contentArea" class="content-area">
+    <!-- Snapshots will be injected here by JS -->
+  </div>
+
+  <!-- Empty State -->
+  <div id="emptyState" class="empty-state visible">
+    <div class="empty-icon">📚</div>
+    <div class="empty-title">No snapshots yet</div>
+    <div class="empty-description">
+      Capture your first page with AI-powered summaries and smart intent detection
     </div>
   </div>
 
-  <h3 style="margin:10px 0 6px 0; font-size:14px;">Saved Snapshots</h3>
-  <div id="snapshots" class="list"></div>
+  <!-- Card Template -->
+  <template id="cardTemplate">
+    <div class="snapshot-card">
+      <div class="card-header">
+        <div class="card-title"></div>
+        <div class="card-url"></div>
+      </div>
 
-  <div id="toast"></div>
+      <div class="intent-chip">
+        <span class="material-icons-round">lightbulb</span>
+        <span class="intent-text"></span>
+      </div>
+
+      <div class="summary-section">
+        <div class="summary-label">Summary</div>
+        <div class="summary-content"></div>
+      </div>
+
+      <div class="card-meta">
+        <span class="material-icons-round">schedule</span>
+        <span class="timestamp"></span>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn btn-resume">
+          <span class="material-icons-round">play_arrow</span>
+          Resume
+        </button>
+        <button class="btn btn-edit">
+          <span class="material-icons-round">edit</span>
+          Edit
+        </button>
+        <button class="btn btn-delete">
+          <span class="material-icons-round">delete</span>
+          Delete
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Intent Edit Modal -->
+  <div id="intentModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">Edit Intent</div>
+      <div class="modal-body">
+        <label for="intentInput">Intent</label>
+        <input 
+          id="intentInput" 
+          type="text" 
+          placeholder="e.g., Follow React tutorial"
+        />
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-action="close-intent">Cancel</button>
+        <button class="btn btn-primary" data-action="save-intent">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">Delete Snapshot</div>
+      <div class="modal-body">
+        <p style="color: var(--on-surface-variant); line-height: 1.5;">
+          Are you sure you want to delete this snapshot? This action cannot be undone.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-action="close-delete">Cancel</button>
+        <button class="btn btn-delete" data-action="confirm-delete">Delete</button>
+      </div>
+    </div>
+  </div>
 
   <script src="popup.js"></script>
 </body>
