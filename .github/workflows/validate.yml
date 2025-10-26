@@ -1,0 +1,19 @@
+name: Validate Extension
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check required files exist
+        run: |
+          test -f manifest.json || exit 1
+          test -f background.js || exit 1
+          test -f popup.html || exit 1
+          test -f popup.js || exit 1
+          test -f content.js || exit 1
+          test -f README.md || exit 1
+          test -f LICENSE || exit 1
+          echo "All required files present"
