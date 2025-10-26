@@ -1,23 +1,37 @@
 {
   "manifest_version": 3,
   "name": "MindMark — Intent-Aware Tab Saver",
-  "version": "1.0.0",
-  "description": "Capture the intent, summary, and next action for your current tab. 100% private — all processing happens locally.",
+  "short_name": "MindMark",
+  "version": "1.0.1",
+  "description": "Capture the intent, summary, and next action for your current tab — fully local, private, and offline-ready.",
+  "author": "Michael Francoo",
+  "homepage_url": "https://github.com/michaelfrancoo75/mindmark-extension",
+  "minimum_chrome_version": "121",
+
   "permissions": [
     "activeTab",
     "tabs",
     "storage",
-    "scripting"
+    "scripting",
+    "alarms",
+    "notifications"
   ],
+
+  "optional_permissions": [
+    "downloads"
+  ],
+
   "host_permissions": [
     "<all_urls>"
   ],
+
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
+
   "action": {
-    "default_title": "MindMark",
+    "default_title": "MindMark — Save Tab Intent",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "assets/icon16.png",
@@ -25,13 +39,38 @@
       "128": "assets/icon128.png"
     }
   },
+
   "icons": {
     "16": "assets/icon16.png",
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
   },
+
   "offline_enabled": true,
-  "minimum_chrome_version": "121",
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }
