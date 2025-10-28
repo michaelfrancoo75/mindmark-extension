@@ -54,18 +54,6 @@ MindMark captures **intent + context** automatically using Chrome's built-in AI.
 
 ---
 
-## 🎬 Demo Video
-
-**[Watch 3-minute demo →](YOUR_YOUTUBE_LINK_HERE)**
-
-Shows:
-- Live AI summarization
-- Intent detection accuracy
-- Search & export features
-- Offline fallback demonstration
-
----
-
 ## ✨ Key Features
 
 ### AI-Powered Intelligence
